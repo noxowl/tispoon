@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-sacle=1.0">
+    <title>tispoon - {{title}}</title>
+</head>
+<body>
+<header>
+    <h1>{{title}}</h1>
+</header>
+<main>
+    <article class="comics">
+        {% for img in articles %}
+        <div>
+            <img class="comics" src="img/{{img}}">
+        </div>
+        {% endfor %}
+</main>
+<footer>
+</footer>
+</body>
+</html>
