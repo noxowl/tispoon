@@ -34,17 +34,17 @@ template = env.get_template('base.html')
 def get_post():
     url = input('Please enter a url: ')
 
-    if not '/' in url[-1]:
+    if '/' not in url[-1]:
         url = url + '/'
 
     post_num = 1
     target = url + str(post_num)
     result = bs(requests.get(target, headers=headers).text, 'lxml')
     latest_num = get_latest_num(result)
-    
+
     while post_num < latest_num:
         print("Start collecting post " + str(post_num))
-        
+
         target = url + str(post_num)
         result = bs(requests.get(target, headers=headers).text, 'lxml')
 
@@ -55,15 +55,15 @@ def get_post():
 
             post_title = get_post_title(result)
             post_article = get_article_image(
-                get_post_article(result)
-                ,ext_path)
+                get_post_article(result),
+                ext_path)
 
             make_index(post_title, post_article, ext_path)
             print("Finished post " + str(post_num))
 
         post_num += 1
         sleep(3)
-    
+
 
 def get_latest_num(source):
     try:
@@ -107,11 +107,11 @@ def get_post_title(source):
 def get_post_article(source):
     image_list = []
     result = source.find("body")\
-                        .find("div", id="content")\
-                        .find("div", class_="article")\
-                        .find_all("img")
+                    .find("div", id="content")\
+                    .find("div", class_="article")\
+                    .find_all("img")
 
-    if not result is None:
+    if result is not None:
         for image in result:
             if "저작자 표시" in image.get('alt', '') or \
             "신고" in image.get('alt', ''):
