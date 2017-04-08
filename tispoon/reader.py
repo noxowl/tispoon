@@ -44,15 +44,15 @@ def get_post():
     
     while post_num < latest_num:
         print("Start collecting post " + str(post_num))
-
-        ext_path = extract_dir + "/" + str(post_num) + "/"
-        if not os.path.exists(ext_path):
-            os.makedirs(ext_path)
         
         target = url + str(post_num)
         result = bs(requests.get(target, headers=headers).text, 'lxml')
 
         if is_post_exist(result):
+            ext_path = extract_dir + "/" + str(post_num) + "/"
+            if not os.path.exists(ext_path):
+                os.makedirs(ext_path)
+
             post_title = get_post_title(result)
             post_article = get_article_image(
                 get_post_article(result)
