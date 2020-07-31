@@ -1,3 +1,3 @@
 # Tispoon
 
-the blog crawler
+the blog scraper
